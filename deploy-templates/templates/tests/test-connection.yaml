@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "dotnet-expose.fullname" . }}-test-connection"
+  labels:
+    {{- include "dotnet-expose.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "dotnet-expose.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
