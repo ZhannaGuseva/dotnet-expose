@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "dotnet-expose.fullname" . }}:{{ .Values.service.port }}']
+      args: ['http://localhost:80/api/hello']
   restartPolicy: Never
